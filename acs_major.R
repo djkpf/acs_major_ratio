@@ -8,7 +8,7 @@ library(zoo)
 library(tidyr)
 library(stringr)
 
-### Import data
+### Import data.  Please email dan.kopf@gmail.com for this file.  It is too large for github
 acs2 <- read.dta(file=paste("your/working/directory/usa_00007.dta"))
 
 ### Change variable types and create new variables
