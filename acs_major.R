@@ -128,8 +128,8 @@ national <- acs2 %>%
   sample_n(500000)
 
 ### Establish survey design
-state.design <- svydesign(id=~serial, weights=~perwt, data=state)
-national.design <- svydesign(id=~serial, weights=~perwt, data=national)
+state.design <- svydesign(id=~1, weights=~perwt, data=state)
+national.design <- svydesign(id=~1, weights=~perwt, data=national)
 
 ### Get estimates from survey
 state_estimate <- svymean(~major, state.design, data=state, na.rm=TRUE)
@@ -181,9 +181,9 @@ ratio2normals <- function(x, mean1,mean2,sd1,sd2,rho){
 #### Input an example.  
 ### Here we use the data for Environmental from Vermont to National
 mean1 <- 0.0061747
-mean2 <- 0.00093748
+mean2 <- 0.00090851
 sd1 <- 0.0013
-sd2 <- .0001
+sd2 <- .00005
 rho <- 0
 
 ### Look at the distribution visually
