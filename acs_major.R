@@ -7,6 +7,7 @@ library(scales)
 library(zoo)
 library(tidyr)
 library(stringr)
+library(googleVis)
 
 ### Import data.  Please email dan.kopf@gmail.com for this file.  It is too large for github
 acs2 <- read.dta(file=paste("your/working/directory/usa_00007.dta"))
@@ -70,13 +71,13 @@ x1 <- all_top100 %>%
   filter(rank_unusual == 1) %>%
   group_by(stateicp) %>%
   mutate(statemajor = paste(stateicp,": ", degfieldd, sep=""),
-         description = paste(degfieldd,": ", roundedratio, sep="")) %>%
+         description = paste(degfieldd,": ", Ratio, sep="")) %>%
   select(stateicp, degfieldd,  major_ratio, rank_unusual, Ratio, statemajor)
 x5 <- all_top100 %>%
   filter(rank_unusual < 6) %>%
-  select(stateicp, degfieldd,  roundedratio, rank_unusual, Ratio) %>%
+  select(stateicp, degfieldd,  Ratio, rank_unusual, Ratio) %>%
   group_by(stateicp) %>%
-  mutate(description = paste(degfieldd,": ", roundedratio, sep="")) %>%
+  mutate(description = paste(degfieldd,": ", Ratio, sep="")) %>%
   ungroup() %>%
   arrange(stateicp, rank_unusual)
 
@@ -88,6 +89,7 @@ G <- gvisGeoChart(x1, locationvar = "State", colorvar = "Ratio", hovervar = "deg
                   options=list(region="US", 
                                displayMode="regions", 
                                resolution="provinces",
+                               colorAxis="{colors:['white', 'blue']}",
                                width=600, height=400))
 
 ### Copy and paste this to get chart into wordpress
