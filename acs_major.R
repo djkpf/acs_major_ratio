@@ -150,8 +150,8 @@ state <- filter(acs2, stateicp == "Ohio", degfieldd != "N/A", ageN > 22)
 national <- acs2 %>%
   filter(degfieldd != "N/A", ageN > 22) %>%
   sample_n(500000)
-state.design <- svydesign(id=~serial, weights=~perwt, data=state)
-national.design <- svydesign(id=~serial, weights=~perwt, data=national)
+state.design <- svydesign(id=~1, weights=~perwt, data=state)
+national.design <- svydesign(id=~1, weights=~perwt, data=national)
 state_estimate <- svymean(~major, state.design, data=state, na.rm=TRUE)
 national_estimate <- svymean(~major, national.design, data=national, na.rm=TRUE)
 xx <- sum(state$perwt[state$major == 1], na.rm = TRUE)/sum(state$perwt)
